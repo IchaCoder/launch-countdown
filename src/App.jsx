@@ -1,6 +1,6 @@
 /** @format */
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Footer from "./Footer";
 
 function App() {
@@ -8,12 +8,6 @@ function App() {
 	const [hour, setHour] = useState("");
 	const [mins, setMins] = useState("");
 	const [secs, setSecs] = useState("");
-	const [isFlipped, setIsFlipped] = useState(false);
-
-	const dayRef = useRef(null);
-	const hourRef = useRef(null);
-	const minRef = useRef(null);
-	const secondRef = useRef(null);
 
 	// curren data
 	const now = Date.now();
@@ -38,9 +32,6 @@ function App() {
 			setHour(hours);
 			setMins(minutes);
 			setSecs(seconds);
-
-			if (secs === 0) {
-			}
 		}, 1000);
 
 		if (remainingSeconds < 0) {
@@ -52,40 +43,31 @@ function App() {
 		timer();
 	}, []);
 
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setIsFlipped(true);
-			console.log("shake and bake");
-		}, 1000);
-
-		return () => clearTimeout(timeout);
-	}, []);
-
 	return (
 		<>
 			<div className="App">
 				<h1>we're launching soon</h1>
 				<div className="container">
 					<article>
-						<div className="number day">
+						<div className="number ">
 							<h2>{day < 10 ? `0${day}` : day}</h2>
 						</div>
 						<h3>days</h3>
 					</article>
 					<article>
-						<div className="number hour">
+						<div className="number ">
 							<h2>{hour < 10 ? `0${hour}` : hour}</h2>
 						</div>
 						<h3>hours</h3>
 					</article>
 					<article>
-						<div className="number min">
+						<div className="number ">
 							<h2>{mins < 10 ? `0${mins}` : mins}</h2>
 						</div>
 						<h3>minutes</h3>
 					</article>
 					<article>
-						<div className={`number second ${isFlipped && "rotate"}`}>
+						<div className={`number second`}>
 							<h2> {secs < 10 ? `0${secs}` : secs} </h2>
 						</div>
 						<h3>seconds</h3>
